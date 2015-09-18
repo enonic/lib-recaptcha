@@ -1,6 +1,6 @@
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/xp/thymeleaf');
-var httpclient = require('/lib/httpclient');
+var recaptcha = require('/lib/enonic/recaptcha/recaptcha');
 
 // Handle GET request
 exports.get = handleGet;
@@ -29,11 +29,8 @@ function handleGet(req) {
     function createModel(req) {
         var model = {};
 
-        var siteConfig = portal.getSiteConfig();
-        model.recaptchaSiteKey = siteConfig.recaptchaSiteKey || '';
-        var recaptchaSecretKey = siteConfig.recaptchaSecretKey || '';
-
-        model.recaptchaIsConfigured = model.recaptchaSiteKey && recaptchaSecretKey ? true : false;
+        model.recaptchaSiteKey = recaptcha.siteKey;
+        model.recaptchaIsConfigured = recaptcha.isConfigured();
 
         model.editMode = req.mode === 'edit';
 
@@ -50,23 +47,12 @@ function handleGet(req) {
 }
 
 function handlePost(req) {
-    var siteConfig = portal.getSiteConfig();
-
-    // Check with Google if user is verified
-    var recaptchaResponse = httpclient.post({
-        'url': 'https://www.google.com/recaptcha/api/siteverify',
-        'params': {
-            'secret': siteConfig.recaptchaSecretKey || '',
-            'response': req.params['g-recaptcha-response']
-        }
-    });
-
-    var recaptcha = JSON.parse(recaptchaResponse);
+    var recaptchaVerified = recaptcha.verify(req.params['g-recaptcha-response']);
 
     return {
         contentType: 'text/json',
         body: {
-            recaptchaValidated: recaptcha.success
+            recaptchaVerified: recaptchaVerified
         }
     }
 }
