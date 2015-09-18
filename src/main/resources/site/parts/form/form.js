@@ -23,7 +23,8 @@ function handleGet(req) {
     function createModel() {
         var model = {};
 
-        model.recaptchaSiteKey = '6LcECg0TAAAAAMdq2r1sItYGOO6-JdRzIYqvPpof';
+        var siteConfig = portal.getSiteConfig();
+        model.recaptchaSiteKey = siteConfig.recaptchaSiteKey || '';
 
         var component = portal.getComponent();
         // Form post url is this component path
@@ -38,7 +39,7 @@ function handleGet(req) {
 }
 
 function handlePost(req) {
-
+    var siteConfig = portal.getSiteConfig();
     var recaptchaValidated = false;
 
     log.info('Captcha response code: ' + req.params['g-recaptcha-response']);
@@ -46,7 +47,7 @@ function handlePost(req) {
     var recaptchaResponse = httpclient.post({
         'url': 'https://www.google.com/recaptcha/api/siteverify',
         'params': {
-            'secret': '6LcECg0TAAAAADcLwAVP_Vn1NopZqprng5LrY7Qh',
+            'secret': siteConfig.recaptchaSecretKey || '',
             'response': req.params['g-recaptcha-response']
         }
     });
