@@ -27,3 +27,6 @@ The site.xml for your app needs to be updated with two input fields for reCAPTCH
         </input>
       </config>
     </site>
+
+## Usage example
+The part "form" contains a simple usage example, which simply outputs a line of text after submitting the form.
