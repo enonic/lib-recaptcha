@@ -28,16 +28,19 @@ public final class HttpClientHandler
     public String execute()
         throws IOException
     {
-        final RequestBody requestBody = params != null ? generateRequestBody() : null;
+        final RequestBody requestBody = generateRequestBody();
         final String responseBody = sendRequest( url, requestBody );
-
         return responseBody;
     }
 
     private RequestBody generateRequestBody()
     {
-        final FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
+        if ( params == null )
+        {
+            return null;
+        }
 
+        final FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
         for ( Map.Entry<String, String> param : params.entrySet() )
         {
             formEncodingBuilder.add( param.getKey(), param.getValue() );
@@ -49,8 +52,6 @@ public final class HttpClientHandler
     private String sendRequest( final String url, final RequestBody post )
         throws IOException
     {
-        final OkHttpClient okHttpClient = new OkHttpClient();
-
         //Builds the request
         Request.Builder requestBuilder = new Request.Builder().url( url );
         if ( post != null )
@@ -60,10 +61,9 @@ public final class HttpClientHandler
         Request request = requestBuilder.build();
 
         //Executes the request
+        final OkHttpClient okHttpClient = new OkHttpClient();
         Response response = okHttpClient.newCall( request ).execute();
-        System.out.println( "Message: " + response.message() );
         final String responseBody = response.body().string();
-        System.out.println( "ResponseBody: " + responseBody );
         return responseBody;
     }
 
