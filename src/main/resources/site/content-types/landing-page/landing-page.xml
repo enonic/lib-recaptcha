@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content-type>
+    <display-name>Landing page</display-name>
+    <content-display-name-script></content-display-name-script>
+    <super-type>base:structured</super-type>
+    <is-abstract>false</is-abstract>
+    <is-final>true</is-final>
+    <is-built-in>false</is-built-in>
+    <allow-child-content>true</allow-child-content>
+    <form/>
+  <x-data mixin="menu-item"/>
+</content-type>
