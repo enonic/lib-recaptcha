@@ -5,7 +5,8 @@
             <input type="text" name="name"/>
         </label>
         <br/><br/>
-        <div class="g-recaptcha" data-th-if="${!editMode}" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback"></div>
+        <div data-th-if="${recaptchaIsConfigured and !editMode}" class="g-recaptcha" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback"></div>
+        <div data-th-if="${!recaptchaIsConfigured}">Please configure reCAPTCHA</div>
         <br/>
         <input type="submit" value="Submit" id="submit-button"/>
         <br/>

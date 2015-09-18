@@ -31,6 +31,10 @@ function handleGet(req) {
 
         var siteConfig = portal.getSiteConfig();
         model.recaptchaSiteKey = siteConfig.recaptchaSiteKey || '';
+        var recaptchaSecretKey = siteConfig.recaptchaSecretKey || '';
+
+        model.recaptchaIsConfigured = model.recaptchaSiteKey && recaptchaSecretKey ? true : false;
+
         model.editMode = req.mode === 'edit';
 
         var component = portal.getComponent();
