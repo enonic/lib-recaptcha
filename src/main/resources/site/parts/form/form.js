@@ -13,18 +13,19 @@ function handleGet(req) {
 
     function renderView() {
         var view = resolve('form.html');
-        var model = createModel();
+        var model = createModel(req);
 
         return {
             body: thymeleaf.render(view, model)
         };
     }
 
-    function createModel() {
+    function createModel(req) {
         var model = {};
 
         var siteConfig = portal.getSiteConfig();
         model.recaptchaSiteKey = siteConfig.recaptchaSiteKey || '';
+        model.editMode = req.mode === 'edit';
 
         var component = portal.getComponent();
         // Form post url is this component path
