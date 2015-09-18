@@ -10,7 +10,14 @@ exports.get = handleGet;
 function handleGet(req) {
     var me = this;
 
-    var result = httpclient.post({});
+    /*    var result = httpclient.post({
+     'url': 'http://httpbin.org/post',
+     'params': {
+     'param1': 'value1',
+     'param2': 'value2'
+     }
+     });*/
+
     log.info(result);
 
     function renderView() {
@@ -43,7 +50,7 @@ function handleGet(req) {
     }
 
     function getMetaDescription() {
-        var appNamePropertyName = app.name.replace(/\./g,'-');
+        var appNamePropertyName = app.name.replace(/\./g, '-');
         var metaDescription = null;
 
         if (me.content.x[appNamePropertyName]) {
