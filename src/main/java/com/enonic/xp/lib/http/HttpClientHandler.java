@@ -3,7 +3,7 @@ package com.enonic.xp.lib.http;
 import java.io.IOException;
 import java.util.Map;
 
-import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -38,21 +38,22 @@ public final class HttpClientHandler
         System.out.println( "EXECUTE" );
 
         final RequestBody requestBody = generateRequestBody();
-        sendRequest( url, requestBody );
+        final String responseBody = sendRequest( url, requestBody );
 
-        return "Request: " + method;
+        return responseBody;
 
     }
 
     private RequestBody generateRequestBody()
     {
-        final StringBuilder content = new StringBuilder( "{" );
+        final FormEncodingBuilder formEncodingBuilder = new FormEncodingBuilder();
+
         for ( Map.Entry<String, String> param : params.entrySet() )
         {
-            content.append( param.getKey() ).append( ":" ).append( param.getValue() );
+            formEncodingBuilder.add( param.getKey(), param.getValue() );
         }
-        content.append( "}" );
-        return RequestBody.create( MediaType.parse( "application/x-www-form-urlencoded; charset=utf-8" ), content.toString() );
+
+        return formEncodingBuilder.build();
     }
 
     private String sendRequest( final String url, final RequestBody post )
@@ -61,11 +62,10 @@ public final class HttpClientHandler
         final OkHttpClient okHttpClient = new OkHttpClient();
 
         //Builds the request
-        Request.Builder requestBuilder = new Request.Builder().url( url );
-        if ( post != null )
-        {
-            requestBuilder.post( post );
-        }
+        Request.Builder requestBuilder = new Request.Builder().url( url ).; if ( post != null )
+    {
+        requestBuilder.post( post );
+    }
         Request request = requestBuilder.build();
 
         //Executes the request
