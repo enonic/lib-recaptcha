@@ -31,6 +31,8 @@ dependencies {
     include "com.enonic.xp:lib-content:${xpVersion}"
     include "com.enonic.xp:lib-portal:${xpVersion}"
     include "com.enonic.xp:lib-thymeleaf:${xpVersion}"
+    include "com.enonic.lib:util:1.0.0"
+    include "com.enonic.lib:menu:1.0.0"
 }
 
 repositories {
