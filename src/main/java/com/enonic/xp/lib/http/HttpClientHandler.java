@@ -62,10 +62,11 @@ public final class HttpClientHandler
         final OkHttpClient okHttpClient = new OkHttpClient();
 
         //Builds the request
-        Request.Builder requestBuilder = new Request.Builder().url( url ).; if ( post != null )
-    {
-        requestBuilder.post( post );
-    }
+        Request.Builder requestBuilder = new Request.Builder().url( url );
+        if ( post != null )
+        {
+            requestBuilder.post( post );
+        }
         Request request = requestBuilder.build();
 
         //Executes the request
