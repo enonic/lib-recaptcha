@@ -16,7 +16,13 @@ function handleGet(req) {
         var model = createModel(req);
 
         return {
-            body: thymeleaf.render(view, model)
+            body: thymeleaf.render(view, model),
+            pageContributions: {
+                headEnd: [
+                    '<script src="https://www.google.com/recaptcha/api.js"></script>',
+                    '<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>'
+                    ]
+            }
         };
     }
 
