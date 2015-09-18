@@ -31,12 +31,14 @@
                 data: postData,
                 success: function(data) {
                     $('#recaptchaForm').hide();
+                    var result;
                     if (data.recaptchaValidated) {
-                        $('#formResult').text('Woohooo, it worked :)').show();
+                        result = 'Woohooo, it worked :)';
                     }
                     else {
-                        $('#formResult').text('Oh no, try again :(').show();
+                        result = 'Oh no, try again :(';
                     }
+                    $('#formResult').text(result).show();
                 },
                 dataType: 'json'
             });
