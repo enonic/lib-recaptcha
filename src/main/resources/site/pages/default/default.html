@@ -17,8 +17,12 @@
 
 <h1>Recaptcha test</h1>
 
-<div data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
-    <div data-portal-component="${component.path}" data-th-remove="tag"></div>
+<div class="container theme-showcase" role="main" data-th-attr="data-portal-region=${mainRegion.name}">
+
+    <div data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
+        <div data-portal-component="${component.path}" data-th-remove="tag"></div>
+    </div>
+
 </div>
 
 </body>
