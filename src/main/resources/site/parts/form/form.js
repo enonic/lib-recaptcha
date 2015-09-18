@@ -40,10 +40,8 @@ function handleGet(req) {
 
 function handlePost(req) {
     var siteConfig = portal.getSiteConfig();
-    var recaptchaValidated = false;
 
-    log.info('Captcha response code: ' + req.params['g-recaptcha-response']);
-
+    // Check with Google if user is verified
     var recaptchaResponse = httpclient.post({
         'url': 'https://www.google.com/recaptcha/api/siteverify',
         'params': {
@@ -51,9 +49,8 @@ function handlePost(req) {
             'response': req.params['g-recaptcha-response']
         }
     });
-    log.info('Captcha response: ' + recaptchaResponse);
-    var recaptcha = JSON.parse(recaptchaResponse);
 
+    var recaptcha = JSON.parse(recaptchaResponse);
 
     return {
         contentType: 'text/json',
