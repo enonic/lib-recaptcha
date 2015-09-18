@@ -1,5 +1,6 @@
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/xp/thymeleaf');
+var httpclient = require('/lib/httpclient');
 
 // Handle GET request
 exports.get = handleGet;
@@ -22,7 +23,7 @@ function handleGet(req) {
     function createModel() {
         var model = {};
 
-        model.recaptchaSiteKey = '6LdjDQ0TAAAAAP5jorxHpl7k5nvjYPMUUZs7dVC7';
+        model.recaptchaSiteKey = '6LcECg0TAAAAAMdq2r1sItYGOO6-JdRzIYqvPpof';
 
         var component = portal.getComponent();
         // Form post url is this component path
@@ -40,10 +41,23 @@ function handlePost(req) {
 
     var recaptchaValidated = false;
 
+    log.info('Captcha response code: ' + req.params['g-recaptcha-response']);
+
+    var recaptchaResponse = httpclient.post({
+        'url': 'https://www.google.com/recaptcha/api/siteverify',
+        'params': {
+            'secret': '6LcECg0TAAAAADcLwAVP_Vn1NopZqprng5LrY7Qh',
+            'response': req.params['g-recaptcha-response']
+        }
+    });
+    log.info('Captcha response: ' + recaptchaResponse);
+    var recaptcha = JSON.parse(recaptchaResponse);
+
+
     return {
         contentType: 'text/json',
         body: {
-            recaptchaValidated: recaptchaValidated
+            recaptchaValidated: recaptcha.success
         }
     }
 }
