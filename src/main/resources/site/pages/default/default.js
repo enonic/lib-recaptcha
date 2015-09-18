@@ -2,12 +2,16 @@ var UTIL = require('/lib/enonic/util/util');
 var menu = require('/lib/enonic/menu/menu');
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/xp/thymeleaf');
+var httpclient = require('/lib/httpclient');
 
 // Handle GET request
 exports.get = handleGet;
 
 function handleGet(req) {
     var me = this;
+
+    var result = httpclient.post({});
+    log.info(result);
 
     function renderView() {
         var view = resolve('default.html');
