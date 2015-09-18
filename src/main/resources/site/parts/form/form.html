@@ -5,9 +5,15 @@
             <input type="text" name="name"/>
         </label>
         <br/><br/>
-        <div class="g-recaptcha" data-sitekey="6LdjDQ0TAAAAAP5jorxHpl7k5nvjYPMUUZs7dVC7"></div>
+        <div class="g-recaptcha" data-sitekey="6LdjDQ0TAAAAAP5jorxHpl7k5nvjYPMUUZs7dVC7" data-callback="recaptchaCallback"></div>
         <br/>
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" id="submit-button" disabled="disabled"/>
         <br/>
     </div>
 </form>
+
+<script>
+    function recaptchaCallback() {
+        $('#submit-button').removeAttr('disabled');
+    };
+</script>

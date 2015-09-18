@@ -18,7 +18,7 @@ function handleGet(req) {
      }
      });*/
 
-    log.info(result);
+    //log.info(result);
 
     function renderView() {
         var view = resolve('default.html');
