@@ -1,6 +1,11 @@
 # lib-recaptcha
 
+Protect your website from spam and abuse while letting real people pass through with ease.
 This library will let you add the popular [reCAPTCHA](https://developers.google.com/recaptcha/) service to your Enonic XP app.
+
+## Compatibility
+
+To be updated...
 
 ## Configuration
 
@@ -15,18 +20,14 @@ The site.xml for your app needs to be updated with two input fields for reCAPTCH
       <config>
         <input type="Text" name="recaptchaSecretKey">
           <label>Secret Key for reCAPTCHA</label>
-          <custom-text/>
-          <help-text/>
           <occurrences minimum="0" maximum="1"/>
         </input>
         <input type="Text" name="recaptchaSiteKey">
           <label>Site Key for reCAPTCHA</label>
-          <custom-text/>
-          <help-text/>
           <occurrences minimum="0" maximum="1"/>
         </input>
       </config>
     </site>
 
 ## Usage example
-The part "form" contains a simple usage example, which simply outputs a line of text after submitting the form.
+The part "form" contains a simple usage example, which simply outputs a line of text (did it succeed or not) after submitting the form.
