@@ -32,10 +32,10 @@
                 success: function(data) {
                     $('#recaptchaForm').hide();
                     if (data.recaptchaValidated) {
-                        $('#formResult').text('woohooo, it worked!').show();
+                        $('#formResult').text('Woohooo, it worked :)').show();
                     }
                     else {
-                        $('#formResult').text('try again').show();
+                        $('#formResult').text('Oh no, try again :(').show();
                     }
                 },
                 dataType: 'json'
