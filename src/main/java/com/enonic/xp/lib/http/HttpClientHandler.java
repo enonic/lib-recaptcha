@@ -11,16 +11,9 @@ import com.squareup.okhttp.Response;
 
 public final class HttpClientHandler
 {
-    private String method;
-
     private String url;
 
     private Map<String, String> params;
-
-    public void setMethod( final String method )
-    {
-        this.method = method;
-    }
 
     public void setUrl( final String url )
     {
@@ -35,13 +28,10 @@ public final class HttpClientHandler
     public String execute()
         throws IOException
     {
-        System.out.println( "EXECUTE" );
-
         final RequestBody requestBody = params != null ? generateRequestBody() : null;
         final String responseBody = sendRequest( url, requestBody );
 
         return responseBody;
-
     }
 
     private RequestBody generateRequestBody()
