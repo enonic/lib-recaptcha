@@ -21,6 +21,12 @@ function handleGet(req) {
 
     function createModel() {
         var model = {};
+
+        // Form post url is this component path
+        model.postUrl = portal.componentUrl({
+            component: component.path
+        });
+
         return model;
     }
 
