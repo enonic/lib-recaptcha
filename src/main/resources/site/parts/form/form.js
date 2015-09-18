@@ -4,6 +4,9 @@ var thymeleaf = require('/lib/xp/thymeleaf');
 // Handle GET request
 exports.get = handleGet;
 
+// Handle POST request
+exports.post = handlePost;
+
 function handleGet(req) {
     var me = this;
 
@@ -22,4 +25,8 @@ function handleGet(req) {
     }
 
     return renderView();
+}
+
+function handlePost(req) {
+
 }
