@@ -33,7 +33,7 @@ dependencies {
     include "com.enonic.xp:lib-thymeleaf:${xpVersion}"
     include "com.enonic.lib:util:1.0.0"
     include "com.enonic.lib:menu:1.0.0"
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    include 'com.squareup.okhttp:okhttp:2.5.0'
 }
 
 repositories {
