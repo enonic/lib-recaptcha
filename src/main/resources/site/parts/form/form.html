@@ -1,4 +1,4 @@
-<form method="POST" action="" data-th-action="${postUrl}">
+<form method="POST" action="" data-th-action="${postUrl}" id="recaptchaForm">
     <div>
         <label>
             <span>Name:</span>
@@ -12,9 +12,41 @@
     </div>
 </form>
 
+<div id="formResult" style="display: none;"></div>
+
 <script>
     function recaptchaCallback() {
         var submitBtn = document.getElementById('submit-button');
         submitBtn.removeAttribute('disabled');
     };
+
+    $(function() {
+        $('#recaptchaForm').submit(function(e) {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+
+            $.ajax({
+                type: "POST",
+                url: formURL,
+                data: postData,
+                success: function(data) {
+                    //console.log(data);
+
+                    $('#recaptchaForm').hide();
+
+                    if (data.recaptchaValidated) {
+
+                        $('#formResult').text('woohooo, it worked!').show();
+                    }
+                    else {
+                        $('#formResult').text('try again').show();
+                    }
+                },
+                dataType: 'json'
+            });
+
+
+            e.preventDefault();
+        });
+    });
 </script>

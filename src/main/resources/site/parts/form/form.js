@@ -36,4 +36,12 @@ function handleGet(req) {
 
 function handlePost(req) {
 
+    var recaptchaValidated = false;
+
+    return {
+        contentType: 'text/json',
+        body: {
+            recaptchaValidated: recaptchaValidated
+        }
+    }
 }
