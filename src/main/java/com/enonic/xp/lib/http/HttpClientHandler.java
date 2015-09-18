@@ -37,7 +37,7 @@ public final class HttpClientHandler
     {
         System.out.println( "EXECUTE" );
 
-        final RequestBody requestBody = generateRequestBody();
+        final RequestBody requestBody = params != null ? generateRequestBody() : null;
         final String responseBody = sendRequest( url, requestBody );
 
         return responseBody;
