@@ -5,7 +5,7 @@
             <input type="text" name="name"/>
         </label>
         <br/><br/>
-        <div class="g-recaptcha" data-sitekey="6LdjDQ0TAAAAAP5jorxHpl7k5nvjYPMUUZs7dVC7" data-callback="recaptchaCallback"></div>
+        <div class="g-recaptcha" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback"></div>
         <br/>
         <input type="submit" value="Submit" id="submit-button" disabled="disabled"/>
         <br/>
@@ -30,12 +30,8 @@
                 url: formURL,
                 data: postData,
                 success: function(data) {
-                    //console.log(data);
-
                     $('#recaptchaForm').hide();
-
                     if (data.recaptchaValidated) {
-
                         $('#formResult').text('woohooo, it worked!').show();
                     }
                     else {
@@ -44,7 +40,6 @@
                 },
                 dataType: 'json'
             });
-
 
             e.preventDefault();
         });

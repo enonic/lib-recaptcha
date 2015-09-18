@@ -22,6 +22,8 @@ function handleGet(req) {
     function createModel() {
         var model = {};
 
+        model.recaptchaSiteKey = '6LdjDQ0TAAAAAP5jorxHpl7k5nvjYPMUUZs7dVC7';
+
         var component = portal.getComponent();
         // Form post url is this component path
         model.postUrl = portal.componentUrl({
