@@ -1,4 +1,4 @@
-package com.enonic.xp.lib.http;
+package com.enonic.lib.recaptcha;
 
 import java.io.IOException;
 import java.util.Map;
