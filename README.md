@@ -124,11 +124,13 @@ function handlePost(req) {
 <div id="formResult" style="display: none;"></div>
 
 <script>
+    // Enables the submit button when CAPTCHA is verified
     function recaptchaCallback() {
         var submitBtn = document.getElementById('submit-button');
         submitBtn.removeAttribute('disabled');
     };
 
+    // Resets the CAPTCHA on verification timeout
     function recaptchaReset() {
         grecaptcha.reset();
     };
