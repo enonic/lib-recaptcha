@@ -38,8 +38,8 @@ As an example, the color scheme and size of the widget can be tuned. reCAPTCHA a
 The part "form" contains a simple usage example, which simply outputs a line of text (did it succeed or not) after submitting the form.
 
 /src/resources/parts/form/form.js
-
-    var portal = require('/lib/xp/portal');
+```javascript
+var portal = require('/lib/xp/portal');
     var thymeleaf = require('/lib/xp/thymeleaf');
     var recaptcha = require('/lib/enonic/recaptcha/recaptcha');
 
@@ -100,6 +100,9 @@ The part "form" contains a simple usage example, which simply outputs a line of 
             }
         }
     }
+```
+
+
 
 /src/resources/parts/form/form.html
 
