@@ -15,7 +15,7 @@ buildscript {
 apply plugin: 'com.enonic.xp.app'
 apply plugin: 'maven-publish'
 
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0'
 group = 'com.enonic.lib'
 
 ext {

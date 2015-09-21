@@ -5,7 +5,9 @@ This library will let you add the popular [reCAPTCHA](https://developers.google.
 
 ## Compatibility
 
-To be updated...
+| Lib version        | XP version |
+| ------------- | ------------- |
+| 1.0.0 | 6.0.0 |
 
 ## Configuration
 
