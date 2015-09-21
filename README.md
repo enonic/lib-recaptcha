@@ -40,7 +40,7 @@ As an example, the color scheme and size of the widget can be tuned. reCAPTCHA a
 ## Usage example
 The part "form" contains a simple usage example, which simply outputs a line of text (did it succeed or not) after submitting the form.
 
-/src/resources/parts/form/form.js
+### Part controller (/src/resources/parts/form/form.js)
 ```javascript
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/xp/thymeleaf');
@@ -105,7 +105,7 @@ function handlePost(req) {
 }
 ```
 
-/src/resources/parts/form/form.html
+### Part view (/src/resources/parts/form/form.html)
 ```html
 <form method="POST" action="" data-th-action="${postUrl}" id="recaptchaForm">
     <div>
