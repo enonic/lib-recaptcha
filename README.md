@@ -114,7 +114,7 @@ function handlePost(req) {
             <input type="text" name="name"/>
         </label>
         <br/><br/>
-        <div data-th-if="${recaptchaIsConfigured and !editMode}" class="g-recaptcha" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback"></div>
+        <div data-th-if="${recaptchaIsConfigured and !editMode}" class="g-recaptcha" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback" data-expired-callback="recaptchaReset"></div>
         <div data-th-if="${!recaptchaIsConfigured}">Please configure reCAPTCHA</div>
         <br/>
         <input type="submit" value="Submit" id="submit-button"/>
@@ -127,6 +127,10 @@ function handlePost(req) {
     function recaptchaCallback() {
         var submitBtn = document.getElementById('submit-button');
         submitBtn.removeAttribute('disabled');
+    };
+
+    function recaptchaReset() {
+        grecaptcha.reset();
     };
 
     $(function() {
