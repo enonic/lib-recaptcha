@@ -9,7 +9,6 @@
         <div data-th-if="${!recaptchaIsConfigured}">Please configure reCAPTCHA</div>
         <br/>
         <input type="submit" value="Submit" id="submit-button"/>
-        <br/>
     </div>
 </form>
 
@@ -26,6 +25,7 @@
             var postData = $(this).serializeArray();
             var formURL = $(this).attr("action");
 
+            // Simple ajax submit with check if recaptcha verified ok or not
             $.ajax({
                 type: "POST",
                 url: formURL,
