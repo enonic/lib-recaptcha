@@ -8,30 +8,22 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.enonic.xp:gradle-plugin:6.1.0-SNAPSHOT'
+        classpath 'com.enonic.xp:gradle-plugin:6.0.0'
     }
 }
 
 apply plugin: 'com.enonic.xp.app'
+apply plugin: 'maven-publish'
 
 version = '1.0.0-SNAPSHOT'
-
-app {
-    name = 'recaptcha'
-    displayName = 'Recaptcha'
-    vendorName = 'Enonic AS'
-    vendorUrl = 'http://enonic.com'
-}
+group = 'com.enonic.lib'
 
 ext {
-    xpVersion = '6.1.0-SNAPSHOT'
+    xpVersion = '6.0.0'
 }
 
 dependencies {
     include "com.enonic.xp:lib-portal:${xpVersion}"
-    include "com.enonic.xp:lib-thymeleaf:${xpVersion}"
-    include "com.enonic.lib:util:1.0.0"
-    include "com.enonic.lib:menu:1.0.0"
     include 'com.squareup.okhttp:okhttp:2.5.0'
 }
 
@@ -41,4 +33,17 @@ repositories {
     maven {
         url 'http://repo.enonic.com/public'
     }
+}
+
+publishing {
+  publications {
+    mavenJava( MavenPublication ) {
+      from components.java
+    }
+  }
+  repositories {
+    maven {
+      url 'http://repo.enonic.net/artifactory/public'
+    }
+  }
 }
