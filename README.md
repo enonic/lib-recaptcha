@@ -13,6 +13,20 @@ This library will let you add the popular [reCAPTCHA](https://developers.google.
 
 Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.google.com/recaptcha/admin). The site key and secret key generated will be used to configure the lib on your site.
 
+### Gradle build dependency
+
+```
+dependencies {
+    include "com.enonic.lib:recaptcha:1.0.0"
+}
+
+repositories {
+    maven {
+        url 'http://repo.enonic.com/public'
+    }
+}
+```
+
 
 ### site.xml
 The site.xml for your app needs to be updated with two input fields for reCAPTCHA configuration (secret key and site key).
