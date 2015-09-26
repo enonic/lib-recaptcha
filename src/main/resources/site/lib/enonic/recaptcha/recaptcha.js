@@ -1,17 +1,20 @@
 var portal = require('/lib/xp/portal');
-var siteConfig = portal.getSiteConfig();
 
 /**
  * The reCAPTCHA site key
  * @type {string}
  */
-exports.siteKey = siteConfig.recaptchaSiteKey || '';
+exports.getSiteKey = function() {
+    return portal.getSiteConfig().recaptchaSiteKey || '';
+}
 
 /**
  * The reCAPTCHA secret key
  * @type {string}
  */
-exports.secretKey = siteConfig.recaptchaSecretKey || '';
+exports.getSecretKey = function() {
+    return portal.getSiteConfig().recaptchaSecretKey || '';
+}
 
 /**
  * Checks with Google if user is verified
@@ -23,7 +26,7 @@ exports.verify = function(response) {
     var recaptchaVerified = post({
         'url': url,
         'params': {
-            'secret': exports.secretKey,
+            'secret': exports.getSecretKey,
             'response': response
         }});
 
@@ -37,7 +40,7 @@ exports.verify = function(response) {
  * @returns {boolean}
  */
 exports.isConfigured = function() {
-    var isConfigured = exports.siteKey && exports.secretKey ? true : false;
+    var isConfigured = exports.getSiteKey && exports.getSecretKey ? true : false;
 
     return isConfigured;
 };

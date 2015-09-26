@@ -56,7 +56,7 @@ As an example, the color scheme and size of the widget can be tuned. reCAPTCHA a
 ## Usage example
 The part "form" contains a simple usage example, which simply outputs a line of text (did it succeed or not) after submitting the form.
 
-### Part controller (/src/resources/parts/form/form.js)
+### Part controller (/src/resources/parts/my-form/my-form.js)
 ```javascript
 var portal = require('/lib/xp/portal');
 var thymeleaf = require('/lib/xp/thymeleaf');
@@ -89,7 +89,7 @@ function handleGet(req) {
     function createModel(req) {
         var model = {};
 
-        model.recaptchaSiteKey = recaptcha.siteKey;
+        model.recaptchaSiteKey = recaptcha.getSiteKey();
         model.recaptchaIsConfigured = recaptcha.isConfigured();
 
         // Check for live edit mode (we don't show the captcha in live edit mode)
@@ -121,7 +121,7 @@ function handlePost(req) {
 }
 ```
 
-### Part view (/src/resources/parts/form/form.html)
+### Part view (/src/resources/parts/my-form/my-form.html)
 ```html
 <form method="POST" action="" data-th-action="${postUrl}" id="recaptchaForm">
     <div>
