@@ -6,15 +6,15 @@ var portal = require('/lib/xp/portal');
  */
 exports.getSiteKey = function() {
     return portal.getSiteConfig().recaptchaSiteKey || '';
-}
+};
 
 /**
  * The reCAPTCHA secret key
  * @type {string}
  */
 exports.getSecretKey = function() {
-    return portal.getSiteConfig().recaptchaSecretKey || '';
-}
+    return portal.getSiteConfig().recaptchaSecretKey || '';
+};
 
 /**
  * Checks with Google if user is verified
@@ -26,7 +26,7 @@ exports.verify = function(response) {
     var recaptchaVerified = post({
         'url': url,
         'params': {
-            'secret': exports.getSecretKey,
+            'secret': exports.getSecretKey(),
             'response': response
         }});
 
@@ -40,7 +40,7 @@ exports.verify = function(response) {
  * @returns {boolean}
  */
 exports.isConfigured = function() {
-    var isConfigured = exports.getSiteKey && exports.getSecretKey ? true : false;
+    var isConfigured = exports.getSiteKey() && exports.getSecretKey() ? true : false;
 
     return isConfigured;
 };

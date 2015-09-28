@@ -8,6 +8,7 @@ This library will let you add the popular [reCAPTCHA](https://developers.google.
 | Lib version        | XP version |
 | ------------- | ------------- |
 | 1.0.0 | 6.0.0 |
+| 1.0.1 | 6.0.0 |
 
 ## Configuration
 
@@ -17,7 +18,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:recaptcha:1.0.0"
+    include "com.enonic.lib:recaptcha:1.0.1"
 }
 
 repositories {
