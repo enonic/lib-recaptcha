@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mixin>
+  <display-name>reCAPTCHA</display-name>
+  <items>
+    <field-set name="recaptcha">
+      <label>reCAPTCHA</label>
+      <items>
+        <input type="Text" name="recaptchaSecretKey">
+          <label>Secret Key for reCAPTCHA</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input type="Text" name="recaptchaSiteKey">
+          <label>Site Key for reCAPTCHA</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+    </field-set>
+  </items>
+</mixin>
