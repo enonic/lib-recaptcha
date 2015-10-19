@@ -8,19 +8,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.enonic.xp:gradle-plugin:6.0.0'
+        classpath "com.enonic.xp:gradle-plugin:${xpVersion}"
     }
 }
 
 apply plugin: 'com.enonic.xp.app'
 apply plugin: 'maven-publish'
-
-version = '1.0.1'
-group = 'com.enonic.lib'
-
-ext {
-    xpVersion = '6.0.0'
-}
 
 dependencies {
     include "com.enonic.xp:lib-portal:${xpVersion}"
