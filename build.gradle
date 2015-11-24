@@ -36,7 +36,7 @@ publishing {
   }
   repositories {
     maven {
-      url 'http://repo.enonic.net/artifactory/public'
+      url 'http://repo.enonic.com/artifactory/public'
     }
   }
 }
