@@ -20,7 +20,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:recaptcha:1.1.0"
+    include "com.enonic.lib:recaptcha:1.1.1"
 }
 
 repositories {
