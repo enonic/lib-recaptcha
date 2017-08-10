@@ -5,11 +5,11 @@
     <field-set name="recaptcha">
       <label>reCAPTCHA</label>
       <items>
-        <input type="Text" name="recaptchaSecretKey">
+        <input type="TextLine" name="recaptchaSecretKey">
           <label>Secret Key for reCAPTCHA</label>
           <occurrences minimum="0" maximum="1"/>
         </input>
-        <input type="Text" name="recaptchaSiteKey">
+        <input type="TextLine" name="recaptchaSiteKey">
           <label>Site Key for reCAPTCHA</label>
           <occurrences minimum="0" maximum="1"/>
         </input>
