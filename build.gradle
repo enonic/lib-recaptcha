@@ -1,23 +1,12 @@
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven {
-            url 'http://repo.enonic.com/public'
-        }
-    }
-
-    dependencies {
-        classpath "com.enonic.xp:gradle-plugin:${xpVersion}"
-    }
+plugins {
+    id 'java'
+    id 'maven'
+    id 'com.enonic.defaults' version '1.0.3'
 }
 
-apply plugin: 'com.enonic.xp.app'
-apply plugin: 'maven-publish'
-
 dependencies {
-    include "com.enonic.xp:lib-portal:${xpVersion}"
-    include 'com.squareup.okhttp:okhttp:2.5.0'
+    compile "com.enonic.xp:lib-portal:${xpVersion}"
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
 }
 
 repositories {
@@ -26,17 +15,4 @@ repositories {
     maven {
         url 'http://repo.enonic.com/public'
     }
-}
-
-publishing {
-  publications {
-    mavenJava( MavenPublication ) {
-      from components.java
-    }
-  }
-  repositories {
-    maven {
-      url 'http://repo.enonic.com/artifactory/public'
-    }
-  }
 }
