@@ -22,7 +22,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:recaptcha:2.0.0"
+    include "com.enonic.lib:lib-recaptcha:2.0.0"
 }
 
 repositories {
@@ -40,7 +40,7 @@ The site.xml for your app needs to be updated with a mixin reference that will a
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
   <form>
-    <inline mixin="recaptcha"/>
+    <mixin name="recaptcha"/>
   </form>
 </site>
 ```
@@ -77,7 +77,7 @@ function handleGet(req) {
             pageContributions: {
                 headEnd: [
                     '<script src="https://www.google.com/recaptcha/api.js"></script>',
-                    '<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>'
+                    '<script src="http://code.jquery.com/jquery-3.4.0.min.js"></script>'
                     ]
             }
         };
