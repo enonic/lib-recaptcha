@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mixin>
   <display-name>reCAPTCHA</display-name>
-  <items>
-    <field-set name="recaptcha">
+  <form>
+    <field-set>
       <label>reCAPTCHA</label>
       <items>
         <input type="TextLine" name="recaptchaSecretKey">
@@ -15,5 +15,5 @@
         </input>
       </items>
     </field-set>
-  </items>
+  </form>
 </mixin>
