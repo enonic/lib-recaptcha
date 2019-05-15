@@ -1,18 +1,17 @@
 plugins {
     id 'java'
-    id 'maven'
-    id 'com.enonic.defaults' version '1.0.3'
+    id 'maven-publish'
+    id 'com.enonic.defaults' version '2.0.1'
+    id 'com.enonic.xp.base' version '2.0.0'
 }
 
 dependencies {
     compile "com.enonic.xp:lib-portal:${xpVersion}"
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
 }
 
 repositories {
     mavenLocal()
     jcenter()
-    maven {
-        url 'http://repo.enonic.com/public'
-    }
+    xp.enonicRepo()
 }

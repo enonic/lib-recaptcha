@@ -12,6 +12,7 @@ This library will let you add the popular [reCAPTCHA](https://developers.google.
 | 1.1.0 | 6.1.0 |
 | 1.1.1 | 6.2.1 |
 | 1.1.2 | 6.2.1 |
+| 2.0.0 | 7.0.0 |
 
 ## Configuration
 
@@ -21,7 +22,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:recaptcha:1.1.1"
+    include "com.enonic.lib:recaptcha:2.0.0"
 }
 
 repositories {
@@ -38,9 +39,9 @@ The site.xml for your app needs to be updated with a mixin reference that will a
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <config>
+  <form>
     <inline mixin="recaptcha"/>
-  </config>
+  </form>
 </site>
 ```
 
@@ -55,8 +56,8 @@ The part "form" contains a simple usage example, which simply outputs a line of 
 ### Part controller (/src/resources/parts/my-form/my-form.js)
 ```javascript
 var portal = require('/lib/xp/portal');
-var thymeleaf = require('/lib/xp/thymeleaf');
-var recaptcha = require('/lib/enonic/recaptcha');
+var thymeleaf = require('/lib/thymeleaf');
+var recaptcha = require('/lib/recaptcha');
 
 // Handle GET request
 exports.get = handleGet;
