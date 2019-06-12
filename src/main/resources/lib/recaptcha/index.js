@@ -1,4 +1,5 @@
 var portal = require('/lib/xp/portal');
+var httpClient = require('/lib/http-client');
 
 /**
  * The reCAPTCHA site key
@@ -23,16 +24,17 @@ exports.getSecretKey = function() {
 exports.verify = function(response) {
     var url = 'https://www.google.com/recaptcha/api/siteverify';
 
-    var recaptchaVerified = post({
+    var response = post({
         'url': url,
         'params': {
             'secret': exports.getSecretKey(),
             'response': response
-        }});
+        }
+    });
 
-    var recaptchaVerifiedJSON = JSON.parse(recaptchaVerified);
+    var responseBody = JSON.parse(response.body);
 
-    return recaptchaVerifiedJSON.success;
+    return responseBody.success;
 };
 
 /**
@@ -51,10 +53,11 @@ exports.isConfigured = function() {
  * @returns {*}
  */
 function post(params) {
-    var bean = __.newBean('com.enonic.lib.recaptcha.HttpClientHandler');
+    return httpClient.request({
+        url: params.url,
+        method: 'POST',
+        body: 'secret=' + params.params.secret + '&response=' + params.params.response,
+        contentType: 'application/x-www-form-urlencoded'
+    });
 
-    bean.url = params.url;
-    bean.params = params.params;
-
-    return __.toNativeObject(bean.execute());
 }

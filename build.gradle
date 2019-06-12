@@ -6,8 +6,7 @@ plugins {
 }
 
 dependencies {
-    compile "com.enonic.xp:lib-portal:${xpVersion}"
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
+    compile 'com.enonic.lib:lib-http-client:2.0.0'
 }
 
 repositories {
