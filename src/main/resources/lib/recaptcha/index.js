@@ -1,5 +1,5 @@
-var portal = require('/lib/xp/portal');
-var httpClient = require('/lib/http-client');
+const portal = require('/lib/xp/portal');
+const httpClient = require('/lib/http-client');
 
 /**
  * The reCAPTCHA site key
@@ -19,7 +19,15 @@ exports.getSecretKey = function() {
 
 /**
  * Checks with Google if user is verified
- * @returns {boolean}
+ * @returns {Object}
+ * {
+        "success": true|false,      // whether this request was a valid reCAPTCHA token for your site
+        "score": number             // the score for this request (0.0 - 1.0)
+        "action": string            // the action name for this request (important to verify)
+        "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+        "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+        "error-codes": [...]        // optional
+    }
  */
 exports.verify = function(response) {
     var url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -32,9 +40,7 @@ exports.verify = function(response) {
         }
     });
 
-    var responseBody = JSON.parse(response.body);
-
-    return responseBody.success;
+    return JSON.parse(response.body);
 };
 
 /**
