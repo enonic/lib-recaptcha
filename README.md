@@ -2,17 +2,19 @@
 
 Protect your website from spam and abuse while letting real people pass through with ease.
 This library will let you add the popular [reCAPTCHA](https://developers.google.com/recaptcha/) service to your Enonic XP app.
+Support v2 and v3 of reCAPTCHA.
 
 ## Compatibility
 
-| Lib version        | XP version |
-| ------------- | ------------- |
-| 1.0.0 | 6.0.0 |
-| 1.0.1 | 6.0.0 |
-| 1.1.0 | 6.1.0 |
-| 1.1.1 | 6.2.1 |
-| 1.1.2 | 6.2.1 |
-| 2.0.0 | 7.0.0 |
+| Lib version | XP version |
+| ----------- | ---------- |
+| 3.0.0       | 7.0.0      |
+| 2.0.0       | 7.0.0      |
+| 1.1.2       | 6.2.1      |
+| 1.1.1       | 6.2.1      |
+| 1.1.0       | 6.1.0      |
+| 1.0.1       | 6.0.0      |
+| 1.0.0       | 6.0.0      |
 
 ## Configuration
 
@@ -22,7 +24,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:lib-recaptcha:2.0.0"
+    include "com.enonic.lib:lib-recaptcha:3.0.0"
 }
 
 repositories {
@@ -32,8 +34,8 @@ repositories {
 }
 ```
 
-
 ### site.xml
+
 The site.xml for your app needs to be updated with a mixin reference that will add the reCAPTCHA configuration (secret key and site key).
 
 ```xml
@@ -51,13 +53,17 @@ How the reCAPTCHA widget is displayed can be configured according to the [offici
 As an example, the color scheme and size of the widget can be tuned. reCAPTCHA also supports audio CAPTCHA.
 
 ## Usage example
+
 The part "form" contains a simple usage example, which simply outputs a line of text (did it succeed or not) after submitting the form.
 
 ### Part controller (/src/resources/parts/my-form/my-form.js)
+
 ```javascript
-var portal = require('/lib/xp/portal');
-var thymeleaf = require('/lib/thymeleaf');
-var recaptcha = require('/lib/recaptcha');
+const portal = require('/lib/xp/portal');
+const thymeleaf = require('/lib/thymeleaf');
+const recaptcha = require('/lib/recaptcha');
+
+const view = resolve('form.html');
 
 // Handle GET request
 exports.get = handleGet;
@@ -66,17 +72,15 @@ exports.get = handleGet;
 exports.post = handlePost;
 
 function handleGet(req) {
-    var me = this;
 
     function renderView() {
-        var view = resolve('form.html');
-        var model = createModel(req);
+        const model = createModel(req);
 
         return {
             body: thymeleaf.render(view, model),
             pageContributions: {
-                headEnd: [
-                    '<script src="https://www.google.com/recaptcha/api.js"></script>',
+                headBegin: [
+                    `<script src="https://www.google.com/recaptcha/api.js?render=${recaptcha.getSiteKey()}"></script>`
                     '<script src="http://code.jquery.com/jquery-3.4.0.min.js"></script>'
                     ]
             }
@@ -84,7 +88,7 @@ function handleGet(req) {
     }
 
     function createModel(req) {
-        var model = {};
+        const model = {};
 
         model.recaptchaSiteKey = recaptcha.getSiteKey();
         model.recaptchaIsConfigured = recaptcha.isConfigured();
@@ -93,7 +97,7 @@ function handleGet(req) {
         model.editMode = req.mode === 'edit';
 
         // The form post url is this component path
-        var component = portal.getComponent();
+        const component = portal.getComponent();
         model.postUrl = portal.componentUrl({
             component: component.path
         });
@@ -105,32 +109,45 @@ function handleGet(req) {
 }
 
 function handlePost(req) {
+    // Verify the response
+    const recaptchaResponse = recaptcha.verify(req.params['token']);
+    let verify = false;
 
-    // Verify the g-recaptcha-response
-    var recaptchaVerified = recaptcha.verify(req.params['g-recaptcha-response']);
+    if (recaptchaResponse.success && recaptchaResponse.score > 0.5) {
+        verify = true;
+    }
 
     return {
-        contentType: 'text/json',
-        body: {
-            recaptchaVerified: recaptchaVerified
-        }
+        contentType: 'application/json',
+        body: JSON.stringify({
+            recaptchaVerified: verify
+        })
     }
 }
 ```
 
 ### Part view (/src/resources/parts/my-form/my-form.html)
+
 ```html
 <form method="POST" action="" data-th-action="${postUrl}" id="recaptchaForm">
     <div>
         <label>
             <span>Name:</span>
-            <input type="text" name="name"/>
+            <input type="text" name="name" />
         </label>
-        <br/><br/>
-        <div data-th-if="${recaptchaIsConfigured and !editMode}" class="g-recaptcha" data-th-attr="data-sitekey=${recaptchaSiteKey}" data-sitekey="124" data-callback="recaptchaCallback" data-expired-callback="recaptchaReset"></div>
-        <div data-th-if="${!recaptchaIsConfigured}">Please configure reCAPTCHA</div>
-        <br/>
-        <input type="submit" value="Submit" id="submit-button"/>
+        <br /><br />
+        <div
+            data-th-if="${recaptchaIsConfigured and !editMode}"
+            class="g-recaptcha"
+            data-th-attr="data-sitekey=${recaptchaSiteKey}"
+            data-sitekey="124"
+            data-callback="recaptchaCallback"
+        ></div>
+        <div data-th-if="${!recaptchaIsConfigured}">
+            Please configure reCAPTCHA
+        </div>
+        <br />
+        <input type="submit" value="Submit" id="submit-button" />
     </div>
 </form>
 
@@ -138,19 +155,14 @@ function handlePost(req) {
 
 <script>
     // Enables the submit button when CAPTCHA is verified
-    function recaptchaCallback() {
-        var submitBtn = document.getElementById('submit-button');
-        submitBtn.removeAttribute('disabled');
-    };
-
-    // Resets the CAPTCHA on verification timeout
-    function recaptchaReset() {
-        grecaptcha.reset();
-    };
-
-    $(function() {
-        $('#recaptchaForm').submit(function(e) {
+    function recaptchaCallback(token) {
+        var submitBtn = document.getElementById("submit-button");
+        submitBtn.removeAttribute("disabled");
+    
+        $("#recaptchaForm").submit(function (e) {
             var postData = $(this).serializeArray();
+            // token included to the backend
+            postData.push({name: "token", value, token});
             var formURL = $(this).attr("action");
 
             // Simple ajax submit with check if recaptcha verified ok or not
@@ -158,22 +170,21 @@ function handlePost(req) {
                 type: "POST",
                 url: formURL,
                 data: postData,
-                success: function(data) {
-                    $('#recaptchaForm').hide();
+                success: function (data) {
+                    $("#recaptchaForm").hide();
                     var result;
                     if (data.recaptchaVerified) {
-                        result = 'Woohooo, it worked :)';
+                        result = "Woohooo, it worked :)";
+                    } else {
+                        result = "Oh no, try again :(";
                     }
-                    else {
-                        result = 'Oh no, try again :(';
-                    }
-                    $('#formResult').text(result).show();
+                    $("#formResult").text(result).show();
                 },
-                dataType: 'json'
+                dataType: "json",
             });
 
             e.preventDefault();
         });
-    });
+    };
 </script>
 ```

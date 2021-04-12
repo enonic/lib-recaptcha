@@ -6,6 +6,8 @@
 # Icon must end with two \r
 Icon
 
+# Enonic cli
+.enonic
 
 # Thumbnails
 ._*
