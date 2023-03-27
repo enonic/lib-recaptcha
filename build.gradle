@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    compile 'com.enonic.lib:lib-http-client:3.1.0'
+    compile 'com.enonic.lib:lib-http-client:3.2.2'
 }
 
 repositories {
