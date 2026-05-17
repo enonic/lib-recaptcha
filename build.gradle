@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    implementation 'com.enonic.lib:lib-http-client:4.0.0-SNAPSHOT'
+    implementation libs.lib.http.client
 }
 
 repositories {
