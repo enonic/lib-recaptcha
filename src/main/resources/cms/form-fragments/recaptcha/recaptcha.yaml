@@ -1,0 +1,18 @@
+kind: "FormFragment"
+title: "reCAPTCHA"
+form:
+  - type: "FieldSet"
+    label: "reCAPTCHA"
+    items:
+      - type: "TextLine"
+        name: "recaptchaSiteKey"
+        label: "Site Key for reCAPTCHA"
+        occurrences:
+          min: 0
+          max: 1
+      - type: "TextLine"
+        name: "recaptchaSecretKey"
+        label: "Secret Key for reCAPTCHA"
+        occurrences:
+          min: 0
+          max: 1

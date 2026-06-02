@@ -1,5 +1,5 @@
 [versions]
-http-client = "4.0.0-SNAPSHOT"
+http-client = "4.0.0-B1"
 
 [libraries]
 lib-http-client = { module = "com.enonic.lib:lib-http-client", version.ref = "http-client" }
