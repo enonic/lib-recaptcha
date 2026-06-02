@@ -7,7 +7,8 @@ Support v2 and v3 of reCAPTCHA.
 ## Compatibility
 
 | Lib version | XP version |
-| ----------- | ---------- |
+|-------------|------------|
+| 4.0.0       | 8.0.0      |
 | 3.0.0       | 7.0.0      |
 | 2.0.0       | 7.0.0      |
 | 1.1.2       | 6.2.1      |
@@ -24,7 +25,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:lib-recaptcha:3.0.0"
+    include "com.enonic.lib:lib-recaptcha:4.0.0"
 }
 
 repositories {
@@ -34,17 +35,15 @@ repositories {
 }
 ```
 
-### site.xml
+### site.yaml
 
-The site.xml for your app needs to be updated with a mixin reference that will add the reCAPTCHA configuration (secret key and site key).
+The site.yaml for your app needs to be updated with a mixin reference that will add the reCAPTCHA configuration (secret key and site key).
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-  <form>
-    <mixin name="recaptcha"/>
-  </form>
-</site>
+```yaml
+kind: "Site"
+form:
+  - type: "FormFragment"
+    name: "recaptcha"
 ```
 
 ### ReCAPTCHA widget configuration
