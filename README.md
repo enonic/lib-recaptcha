@@ -24,7 +24,7 @@ Create your reCAPTCHA API keys on the [official reCAPTCHA site](https://www.goog
 
 ```
 dependencies {
-    include "com.enonic.lib:lib-recaptcha:3.0.0"
+    include "com.enonic.lib:lib-recaptcha:4.0.0"
 }
 
 repositories {
